@@ -20,7 +20,7 @@ pipeline {
                         }
                     app = docker.build("fortunexfortune/notepad-application")
                     app.inside {
-                        sh 'echo $(curl localhost:8081)'
+                        sh 'echo $(curl localhost:8080)'
                     }
                 }
             }
@@ -57,7 +57,7 @@ pipeline {
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$deployment_ip \"docker run --restart always --name notepad-application -p 8081:8081 -d fortunexfortune/notepad-application:${env.BUILD_NUMBER}\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$deployment_ip \"docker run --restart always --name notepad-application -p 8081:8080 -d fortunexfortune/notepad-application:${env.BUILD_NUMBER}\""
                     } 
                 } 
             }
