@@ -1,5 +1,5 @@
 # FROM openjdk:8-jdk-alpine
-FROM maven:latest as maven-build
+FROM docker.io/rowanto/docker-java8-mvn-nodejs-npm
 
 WORKDIR /usr/src/app
 COPY / /usr/src/app
