@@ -1,4 +1,6 @@
-FROM openjdk:8-jdk-alpine
+# FROM openjdk:8-jdk-alpine
+FROM maven:latest as maven-build
+
 WORKDIR /usr/src/app
 COPY / /usr/src/app
 EXPOSE 8080
