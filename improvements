@@ -1,0 +1,1 @@
+use a Dockerimage to run a mySql instance in the production server to communiate with the springboot standalone instead of isntalling mysql on the jenkins server.
