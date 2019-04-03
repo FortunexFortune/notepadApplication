@@ -14,11 +14,11 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh 'docker rmi fortunexfortune/notepad-application'
+                        sh 'docker rmi fortunexfortune/notepadApplication'
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                    app = docker.build("fortunexfortune/notepad-application")
+                    app = docker.build("fortunexfortune/notepadApplication")
                     app.inside {
                         sh 'echo $(curl localhost:8080)'
                     }
@@ -50,14 +50,14 @@ pipeline {
                 milestone(1)
                 withCredentials([usernamePassword(credentialsId: 'deployment_server_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     script {
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$deployment_ip \"docker pull fortunexfortune/notepad-application:${env.BUILD_NUMBER}\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$deployment_ip \"docker pull fortunexfortune/notepadApplication:${env.BUILD_NUMBER}\""
                         try {
-                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$deployment_ip \"docker stop notepad-application\""
-                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$deployment_ip \"docker rm notepad-application\""
+                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$deployment_ip \"docker stop notepadApplication\""
+                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$deployment_ip \"docker rm notepadApplication\""
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$deployment_ip \"docker run --restart always --name notepad-application -p 8081:8080 -d fortunexfortune/notepad-application:${env.BUILD_NUMBER}\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$deployment_ip \"docker run --restart always --name notepadApplication -p 8081:8080 -d fortunexfortune/notepadApplication:${env.BUILD_NUMBER}\""
                     } 
                 } 
             }
