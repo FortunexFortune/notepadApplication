@@ -1,1 +1,2 @@
-use a Dockerimage to run a mySql instance in the production server to communiate with the springboot standalone instead of isntalling mysql on the jenkins server.
+use a Dockerimage to run a mySql instance in the production server that communicates with the spring boot standalone,
+instead of installing mySql on the Jenkins server.
