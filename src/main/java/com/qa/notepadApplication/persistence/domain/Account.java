@@ -13,13 +13,9 @@ import javax.persistence.OneToMany;
 @Entity
 public class Account {
 	@Id
-	@Column(name="username")
+	@Column(name="username", unique=true)
 	private String userName;
 	private String pwd;
-	
-
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="userName", cascade=CascadeType.ALL)
-	private List<Note> notes = new ArrayList<>();
 	
 	public Account() {
 		//empty constructor
@@ -44,13 +40,6 @@ public class Account {
 	}
 	
 
-	public List<Note> getNotes() {
-		return notes;
-	}
-
-	public void setNotes(List<Note> notes) {
-		this.notes = notes;
-	}
 
 
 
