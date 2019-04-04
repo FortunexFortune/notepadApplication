@@ -56,10 +56,16 @@ class AccountServiceImplTest {
 		account.setPwd("1234");
 		Optional<Account>accountOptional = Optional.of(account);
 		when(repo.findById(anyString()) ).thenReturn(accountOptional);
-		
 		Optional<Account> accountinDB = accountService.findAccountByID("fortune");
 		assertNotNull(accountinDB);
 		assertEquals("fortune", accountinDB.get().getUserName());
+	}
+	
+	@Test
+	void testFindAccountByID_userNameNotFound() {
+
+		when(repo.findById(anyString())).thenReturn(null);
+		assertEquals(accountService.findAccountByID("fortune"), null);
 	}
 
 }
