@@ -5,11 +5,15 @@ import java.util.Optional;
 
 import com.qa.notepadApplication.persistence.domain.Account;
 
-public interface  AccountService {
+public interface AccountService {
+
+	Account addAccount(Account account);
 	
-    Account addAccount(Account account);
-    List<Account> getAllAccounts();
-    Optional<Account> getAccount(String userName);
-    Optional<Account> deleteAccount(String userName);
-    Optional<Account> updateAccount(String userName);
+	Optional<Account> findAccountByID(String userName);
+
+	List<Account> getAllAccounts();
+
+	String deleteAccount(String userName);
+
+	String updateAccount(Account account);
 }

@@ -16,7 +16,9 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public Account addAccount(Account account) {
-		// TODO Auto-generated method stub
+		if(repo.findById(account.getUserName()) != null) {
+			return null;
+		}
 		return repo.save(account);
 	}
 
@@ -25,25 +27,31 @@ public class AccountServiceImpl implements AccountService {
 		// TODO Auto-generated method stub
 		return repo.findAll();
 	}
+	
 
 	@Override
-	public Optional<Account> getAccount(String userName) {
-		// TODO Auto-generated method stub
+	public String deleteAccount(String userName) {
+		if (repo.findById(userName) != null ) {
+			repo.deleteById(userName);
+			return "{\"message\": \"account has been sucessfully deleted\"}";
+		};
+		return "{\"message\": \"account was not deleted!!\"}";
+	}
+
+	@Override
+	public String updateAccount(Account accountToUpdate) {
+		Optional<Account> accountInDB = repo.findById(accountToUpdate.getUserName());
+		if (accountInDB != null) {
+			accountInDB.get().setPwd(accountToUpdate.getPwd());
+			repo.save(accountInDB.get());
+			return "{\"message\": \"account has been sucessfully updated\"}";
+		}
+		return "{\"message\": \"account was not updated!!\"}";
+		}
+
+	@Override
+	public Optional<Account> findAccountByID(String userName) {
 		return repo.findById(userName);
-	}
-	
-	
-
-	@Override
-	public Optional<Account> deleteAccount(String userName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Optional<Account> updateAccount(String userName) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
