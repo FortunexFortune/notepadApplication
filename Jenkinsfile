@@ -57,7 +57,7 @@ pipeline {
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$deployment_ip \"docker run --restart always --name notepadapplication -p 8081:8080 -d fortunexfortune/notepadapplication:${env.BUILD_NUMBER}\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$deployment_ip \"docker run --net=host --restart always --name notepadapplication -p 8081:8080 -d fortunexfortune/notepadapplication:${env.BUILD_NUMBER}\""
                     } 
                 } 
             }
